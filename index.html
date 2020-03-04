@@ -17,7 +17,7 @@
     <div class="container-fluid">
       <div class="jumbotron text-center">
         <h1 class="display-4">Hello, world!</h1>
-        <h1 class="display-4">My Name is ????</h1>
+        <h1 class="display-4">My Name is <span id="name">????</span></h1>
         <hr class="my-4">
         <p>Click the button below to find out what my name is!</p>
         <button type="button" class="btn btn-outline-primary btn-lg" onclick="revealName()">Reveal Name</button>
@@ -26,14 +26,14 @@
 
     <script>
       function revealName(){
-        var mRequest = new XMLHttpRequest();
-        mRequest.onreadystatechange = function(){
-          alert(mRequest.onreadystatechange);
-          alert(mRequest.readyState);
-          alert(mRequest.status);
+        var mReq = new XMLHttpRequest();
+        mReq.onreadystatechange = function(){
+          if(mReq.readyState == 4 && mReq.status == 200){
+            document.querySelector("#name").innerHTML = this.responseText;
+          }
         };
-        mRequest.open("GET", "name.txt", true);
-        mRequest.send();
+        mReq.open("GET", "name.txt", true);
+        mReq.send();
       }
     </script>
 
