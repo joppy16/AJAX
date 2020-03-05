@@ -29,10 +29,15 @@
         var mReq = new XMLHttpRequest();
         mReq.onreadystatechange = function(){
           if(mReq.readyState == 4 && mReq.status == 200){
-            document.querySelector("#name").innerHTML = this.responseText;
+            var nameObj = this.responseText;
+            console.log(nameObj);
+            nameObj = JSON.parse(nameObj);
+            console.log(nameObj.lastName);
+            document.querySelector("#name").innerHTML = nameObj.firstName + " " + nameObj.lastName;
+            document.querySelector("#info").innerHTML = "I am " + nameObj.age " and I am a " + nameObj.role;
           }
         };
-        mReq.open("GET", "name.txt", true);
+        mReq.open("GET", "name.json", true);
         mReq.send();
       }
     </script>
